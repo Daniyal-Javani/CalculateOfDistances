@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\Unit::insert([
+            ['name' => 'meter', 'conversion_factor' => 1],
+            ['name' => 'yard', 'conversion_factor' => 0.9144],
+            ['name' => 'mile', 'conversion_factor' => 1609.34]
+        ]);
     }
 }

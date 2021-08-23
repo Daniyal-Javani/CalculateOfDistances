@@ -162,7 +162,7 @@ class DistanceCalculatorTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson(['data' => [
-                'value' => 2.9527,
+                'value' => 2.9528,
                 'unit' => 'yard'
             ]]);
     }
@@ -254,8 +254,31 @@ class DistanceCalculatorTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson(['data' => [
-                'value' => 2415.216,
+                'value' => 2415.21,
                 'unit' => 'meter'
+            ]]);
+    }
+
+    public function test_can_calculate_yard_and_mile_to_yard()
+    {
+        $response = $this->postJson('api/calculate-distance', [
+            'distances' => [
+                [
+                    'value' => 1.5,
+                    'unit' => 'yard'
+                ], [
+                    'value' => 1.2,
+                    'unit' => 'mile'
+                ],
+            ],
+            'operation' => 'add',
+            'response_unit' => 'yard'
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJson(['data' => [
+                'value' => 2113.4948,
+                'unit' => 'yard'
             ]]);
     }
 }
