@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Distance\Strategies\CalculatorStrategyContexts;
 use App\DTOs\CalculateUnitDTO;
 use App\Models\Unit;
 
@@ -22,12 +23,10 @@ class CalculatorService
             $distances[] = $this->convert($distance);
         }
 
-        $sum = 0;
-        foreach ($distances as $distance) {
-            $sum += $distance;
-        }
+        $calculatorStrategyContext = new CalculatorStrategyContexts($calculateUnitDTO->operation);
+        $result = $calculatorStrategyContext->calculate($distances);
 
-        return round($sum, 4);
+        return round($result, 4);
     }
 
     private function convert(array $distance)
