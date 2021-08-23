@@ -29,7 +29,7 @@ class CalculateDistancesRequest extends FormRequest
         $unitsName = $unitsName->implode(',');
         return [
             'response_unit' => 'required|in:' . $unitsName,
-            'operation' => 'required|in:add',
+            'operation' => 'required|in:add,sub',
             'distances' => 'required|array|size:2',
             'distances.*.value' => 'required|numeric',
             'distances.*.unit' => 'required|in:' . $unitsName,

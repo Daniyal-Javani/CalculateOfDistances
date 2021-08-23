@@ -281,4 +281,28 @@ class DistanceCalculatorTest extends TestCase
                 'unit' => 'yard'
             ]]);
     }
+
+    public function test_can_calculate_mile_and_yard_subtract_to_yard()
+    {
+        $response = $this->postJson('api/calculate-distance', [
+            'distances' => [
+                [
+                    'value' => 1.2,
+                    'unit' => 'mile'
+                ],
+                [
+                    'value' => 1.5,
+                    'unit' => 'yard'
+                ],
+            ],
+            'operation' => 'sub',
+            'response_unit' => 'yard'
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJson(['data' => [
+                'value' => 2110.4948,
+                'unit' => 'yard'
+            ]]);
+    }
 }
